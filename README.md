@@ -28,7 +28,7 @@ which in this simplest form executes
     module.exports    = server;
     
     
-    
+<br>
 https-quick adds a function to the returned server object<br>
 to provide some extended functionality
 
