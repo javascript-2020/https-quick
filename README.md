@@ -84,6 +84,7 @@ the exposed <code> quick </code> function takes parameters in any order
 there is a convenience 404 not found at <code> quick.notfound </code>
 it requires the request and response streams as arguments
 
+<pre>
 
     var server    = require('https-quick').quick(request,'hello');
     
@@ -107,6 +108,8 @@ it requires the request and response streams as arguments
           
     }//index
     
+</pre>
+
 <br>
 <br>
 <br>
