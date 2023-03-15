@@ -31,7 +31,7 @@ which in this simplest form executes
 <br>
 https-quick adds a function to the returned server object<br>
 to provide some extended functionality
-
+<br>
 
     var server    = require('https-quick');
     
