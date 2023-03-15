@@ -76,7 +76,7 @@ the exposed <code> quick </code> function takes parameters in any order
   - the server will return a simple hello page on the url <code> /hello </code>
   - it also provides <code> /favicon.ico </code>
   - the cacert can be downloaded from <code> /cacert </code>
-  - it adds cors support, all origins to get and post requests
+  - it adds cors support, for all origins to get and post requests
   
 <br>
 <br>
@@ -93,7 +93,7 @@ it requires the request and response streams as arguments
           
             case '/index.html'      : request.index(req,res);       break;
             
-            default                 : server.quick.notfound(req,res);
+            default                 : **server.quick.notfound(req,res);**
             
           }//switch
           
