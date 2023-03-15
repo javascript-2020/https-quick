@@ -93,7 +93,7 @@ it requires the request and response streams as arguments
           
             case '/index.html'      : request.index(req,res);       break;
             
-            default                 : **server.quick.notfound(req,res);**
+            default                 : <b>server.quick.notfound(req,res);</b>
             
           }//switch
           
