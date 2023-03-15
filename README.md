@@ -21,20 +21,18 @@ var server    = require('https-quick');
 
 which in this simplest form executes
 
-<code>
 
-//https-quick.js
-
-var key           = `...`;
-var cert          = `...`;
-var https         = require('https');
-var server        = https.createServer({key,cert});
-
-module.exports    = server;
-
-
-</code>
-
+    //https-quick.js
+    
+    var key           = `...`;
+    var cert          = `...`;
+    var https         = require('https');
+    var server        = https.createServer({key,cert});
+    
+    module.exports    = server;
+    
+    
+    
 https-quick provides some extended functionality which is accessed by
 a custom function on the returned server object
 
