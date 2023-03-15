@@ -40,6 +40,8 @@
                     server.listen(port);
               }
               
+              return server;
+              
         }//quick
         
         quick.notfound=function(req,res){
@@ -75,8 +77,10 @@
               }
               
               if(params.onrequest){
-                    params.onrequest(req,res);
-                    return;
+                    if(typeof params.onrequest==='function'){
+                          params.onrequest(req,res);
+                          return;
+                    }
               }
               
               quick.notfound(req,res);
@@ -341,8 +345,8 @@
         
         function setup(){
         
-              key     = `
------BEGIN RSA PRIVATE KEY-----
+              key     =
+`-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAp1/aEck7k7OGlQe373+zEYiznlk0ORrg0UeyDGsULaGyIpG+
 DW/1m6hga/y5LCObKNYhU2O2CYLOunzEXgFEhLq73zQ1rWNKdF/dE1P97lAeNmJ7
 qapVHgmvqRR+M5JxGHHAr3cRS06WW2H4jJD4HWVuYhuww6igP6WhVWYoPn6sgDcW
@@ -368,11 +372,10 @@ VehyL2/7WjanTDRsnaymBiez1SD3Qnfex6/lMf/sudYr3YLOzRRxwQO7DL/f9bIY
 +R6BoQKBgFJN52moK6gfRCuTfqhihMy0O9CJCYIQm8tSMCrLD53DtoiMTuP1LDFu
 5r3/rrCl5dRcb33nWz76hggtxpJo4H5DqLjoZlbajWxee5fSwqiBgWN2WNfFeui4
 2DLyPhNkj/odVDub9Jxc8RoKK+D89b4/2jM955IiExkWb8MItV0E
------END RSA PRIVATE KEY-----
-`;
+-----END RSA PRIVATE KEY-----`;
 
-              cert    = `
-Certificate:
+              cert    =
+`Certificate:
     Data:
         Version: 3 (0x2)
         Serial Number: 4096 (0x1000)
@@ -457,11 +460,11 @@ gipGgn/MkLqw0qTrkwsM9quC0JA2PGwEdG1D6e2mO93pNLekZRGVusrvZ3oWiTlJ
 qJxkRBS6Jo+mN+E39A02+DnMTqlJ9iEz4/WxEt5+ZusJfEG3CUzVagRlKRMH07sT
 TlayKPK6xqesupJoBkBJ3UpDhfVrh4V6zz84eIVY54D9ctAM+JLyFh8zMu1Eyjzz
 lL6itKCSei2lWVodvvO+BmkEqLqpGXrri5s=
------END CERTIFICATE-----
-`;
+-----END CERTIFICATE-----`;
 
-              cacert    = `
------BEGIN CERTIFICATE-----
+
+              cacert    =
+`-----BEGIN CERTIFICATE-----
 MIIDOzCCAiOgAwIBAgIJAOpBqbMP/4GVMA0GCSqGSIb3DQEBCwUAMBYxFDASBgNV
 BAMMC3RzdC1yb290LWNhMB4XDTIyMDgxNDA5MjgwNFoXDTQ5MTIzMDA5MjgwNFow
 FjEUMBIGA1UEAwwLdHN0LXJvb3QtY2EwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAw
@@ -480,18 +483,26 @@ nlh4AgczG7Yxs1MPm7QiYdLpRD128x8B4gkOwe54D9yUch/PHkb5jkII7a1ctb9q
 ZzrfWtPiYt7x/DT1ljIYo2m4lLdns5CHkqHlDRjyaiV4kgi7EVlpIKvjZaNNpN1a
 0aKw0m5zG50jX44AtKttW/EybFj0KR9hHeaGvB9MFIz2ZiPM9OGek6NPrLr7tSjJ
 KcW4i/Y+AMJCHEjy+Mj/
------END CERTIFICATE-----
-`;
+-----END CERTIFICATE-----`;
 
         }//setup
         
         
+        
+// ------------ images -----------
+
 img.favicon=
 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALxJREFUOE9jZE'+
 'ADaVX9Dehi+Piz2gpR1DOiK16y6eB/W0tDosw8fPw8Q4yfPYoZOA0EKcYHQJaSZOCqTQcYVFWUsJp5+849hjA/B8oN1JAXY3jz8S'+
 'vD8TOXSTdwxoJ1DEJCQlhd+O7dO4aMhCDKXQgzfdTLxKVDbMlmcMUyMXmPpJwCM/D/fwaGk9degrnmWuIMjEghRpaBJ66+ZLj6ig'+
 'NsoLbYDwYLbXG44weHgVT3Mr7IIcvLFBtIaRUAAKWC3hWePif+AAAAAElFTkSuQmCC'
 ;
+
+
+
+
+// ----------- html -----------
+
 
 html.hello=`
 <meta name=viewport content='width=device-width, initial-scale=1' />
