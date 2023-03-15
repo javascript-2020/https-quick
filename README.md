@@ -29,7 +29,7 @@ which in this simplest form executes
     
     
 <br>
-https-quick adds a function to the returned server object<br>
+https-quick adds a function named <code> quick </code> to the returned server object<br>
 to provide some extended functionality
 <br>
 <br>
@@ -46,14 +46,20 @@ to provide some extended functionality
     }//request
     
     
-then in the browser visit :  https://localhost:3002/hello
+https://localhost:3002/hello
 
+<br>
+<br>
 
 when the quick function is called<br>
 
 - https-quick adds onerror and onlistening functions
 - calls <code> server.listen </code>
+<br>
+- it returns the server object for chaining
 
+<br>
+<br>
 
 the exposed <code> quick </code> function takes parameters in any order
 
@@ -71,13 +77,14 @@ the exposed <code> quick </code> function takes parameters in any order
   - the cacert can be downloaded from <code> /cacert </code>
   - it adds cors support, all origins to get and post requests
   
-  
-there is a convenience 404 not found at <code> server.quick.notfound </code>
+<br>
+<br>
+
+there is a convenience 404 not found at <code> quick.notfound </code>
 it requires the request and response streams as arguments
 
 
-    var server    = require('https-quick');
-    server.quick(request);
+    var server    = require('https-quick').quick(request,'hello');
     
     function request(req,res){
     
@@ -99,6 +106,35 @@ it requires the request and response streams as arguments
           
     }//index
     
+<br>
+<br>
+<br>
+
+example useage:
+
+    var server    = require('https-quick').quick(request);
+    
+    function request(req,res){
+    
+          var file    = chk(req);
+          if(!file)return;
+          
+          var data    = require('fs').readFileSync(file);
+          res.end(data);
+          
+    }//request
+    
+    function chk(req,res){
+    
+          var file    = req.url.slice(1);
+          var p1      = path.resolve(__dirname,file).substring(0,__dirname.length);
+          if(p1!==__dirname){
+                server.quick.notfound(req,res);
+                return false;
+          }
+          return __dirname+'/'+file;
+          
+    }//chk
     
     
     
