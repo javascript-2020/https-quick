@@ -55,6 +55,10 @@
         on.request=function(req,res){
         
               if(params.hello){
+                    if(req.method==='OPTIONS'){
+                          cors(res);
+                          return;
+                    }
                     if(req.url==='/hello'){
                           on.request.hello(req,res);
                           return;
@@ -67,6 +71,7 @@
                           on.request.cacert(req,res);
                           return;
                     }
+                    
               }
               
               if(params.onrequest){
@@ -171,6 +176,17 @@
         }//listening
         
         
+        function cors(res){
+        
+              var headers   = {
+                    'Access-Control-Allow-Origin'     : '*',
+                    'Access-Control-Allow-Methods'    : 'OPTIONS, POST, GET',
+                    'Access-Control-Max-Age'          : 2592000,                            // 30 days
+              };
+              res.writeHead(204,headers);
+              res.end();
+              
+        }//cors
         
         function getparams(args){
         

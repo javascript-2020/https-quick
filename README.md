@@ -50,8 +50,9 @@ then in the browser visit :  https://localhost:3002/hello
 
 when the quick function is called<br>
 
-https-quick adds onerror and onlistening functions
-and calls <code> server.listen </code> for you
+- https-quick adds onerror and onlistening functions
+- calls <code> server.listen </code>
+- adds cors support
 
 
 the exposed <code> quick </code> function takes parameters in any order
