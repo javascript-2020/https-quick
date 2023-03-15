@@ -52,7 +52,6 @@ when the quick function is called<br>
 
 - https-quick adds onerror and onlistening functions
 - calls <code> server.listen </code>
-- adds cors support
 
 
 the exposed <code> quick </code> function takes parameters in any order
@@ -64,14 +63,12 @@ the exposed <code> quick </code> function takes parameters in any order
 - the first function in the parameter list will be used for the
   onrequest callback
   
-- if the string 'hello' is found within the parameter list, the server
-  will return a simple hello page on the url <code> /hello </code> it
-  then also provides
-  
-  <code> /favicon.ico </code>
-  and
-  <code> /cacert </code>
-  urls
+- if the string 'hello' is found within the parameter list
+
+  - the server will return a simple hello page on the url <code> /hello </code>
+  - it also provides <code> /favicon.ico </code>
+  - the cacert can be downloaded from <code> /cacert </code>
+  - it adds cors support, all origins to get and post requests
   
   
 there is a convenience 404 not found at <code> server.quick.notfound </code>
