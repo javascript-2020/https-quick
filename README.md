@@ -73,8 +73,8 @@ the exposed <code> quick </code> function takes parameters in any order
   urls
   
   
-there is a convenience not found / page 404 at <code> server.quick.notfound </code>
-it requires the request and response streams
+there is a convenience 404 not found at <code> server.quick.notfound </code>
+it requires the request and response streams as arguments
 
 
     var server    = require('https-quick');
