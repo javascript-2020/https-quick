@@ -5,20 +5,16 @@ https-quick tries to be a drop in for https
 for when you just want to throw together a quick https server
 it has keys and certificates built in and some extended functionality
 
-<code>
 
     npm install https-quick
     
-</code>
-
+    
 useage:
 
-<code>
 
-var server    = require('https-quick');
-
-</code>
-
+    var server    = require('https-quick');
+    
+    
 which in this simplest form executes
 
 
