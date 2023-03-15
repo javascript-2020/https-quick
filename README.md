@@ -3,7 +3,7 @@
 
 https-quick tries to be a drop in for https,
 for when you just want to throw together a quick https server<br>
-it has keys and certificates built in and some extended functionality
+it has keys and certificates built in and some extra functionality
 
 
     npm install https-quick
@@ -32,7 +32,7 @@ which in this simplest form executes
 
 <br>
 https-quick adds a function named <code> quick </code> to the returned server object<br>
-to provide some extended functionality
+to provide extended functionality
 <br>
 <br>
 
@@ -40,7 +40,7 @@ to provide some extended functionality
 
     var server    = require('https-quick');
     
-    server.quick(request,'hello');
+    <b>server.quick(request,'hello');</b>
     
     
     function request(req,res){
@@ -127,7 +127,7 @@ example useage:
     
           res.setHeader('content-type','text/html');
           res.end(`
-                <div id=center style='position:relative;top:33%;text-align:center;font-family:arial;font-weight:bold;'>
+                &lt;div id=center style='position:relative;top:33%;text-align:center;font-family:arial;font-weight:bold;'>
                     <div id=time style='font-size:42px;color:green'></div>
                     <div id=date style='font-size:32px;color:blue;margin-top:20px'></div>
                 </div>
