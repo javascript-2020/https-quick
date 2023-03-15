@@ -17,6 +17,7 @@ useage:
     
 which in this simplest form executes
 
+<pre>
 
     //https-quick.js
     
@@ -27,12 +28,15 @@ which in this simplest form executes
     
     module.exports    = server;
     
-    
+</pre>
+
 <br>
 https-quick adds a function named <code> quick </code> to the returned server object<br>
 to provide some extended functionality
 <br>
 <br>
+
+<pre>
 
     var server    = require('https-quick');
     
@@ -45,7 +49,8 @@ to provide some extended functionality
           
     }//request
     
-    
+</pre>
+
 https://localhost:3002/hello
 
 <br>
@@ -81,12 +86,12 @@ the exposed <code> quick </code> function takes parameters in any order
 <br>
 <br>
 
-there is a convenience 404 not found at <code> quick.notfound </code>
+there is a convenience '404 not found' at <code> quick.notfound </code>
 it requires the request and response streams as arguments
 
 <pre>
 
-    var server    = require('https-quick').quick(request,'hello');
+    var server    = require('https-quick').quick(request,<b>'hello'</b>);
     
     function request(req,res){
     
@@ -116,6 +121,34 @@ it requires the request and response streams as arguments
 
 example useage:
 
+<pre>
+
+    require('./https-quick').quick((req,res)=>{
+    
+          res.setHeader('content-type','text/html');
+          res.end(`
+                <div id=center style='position:relative;top:33%;text-align:center;font-family:arial;font-weight:bold;'>
+                    <div id=time style='font-size:42px;color:green'></div>
+                    <div id=date style='font-size:32px;color:blue;margin-top:20px'></div>
+                </div>
+                <script>
+                      var text=()=>{
+                            var d=new Date().toString();
+                            var i1=d.indexOf(':'),i2=d.lastIndexOf(':');
+                            time.textContent=d.slice(i1-2,i2+3);
+                            date.textContent=d.slice(0,i1-2);
+                      };
+                      text();
+                      setInterval(text,1000);
+                </script>
+          `);
+          
+    });
+    
+</pre>
+
+<pre>
+
     var server    = require('https-quick').quick(request);
     
     function request(req,res){
@@ -140,5 +173,4 @@ example useage:
           
     }//chk
     
-    
-    
+</pre>

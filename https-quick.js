@@ -16,7 +16,6 @@
         module.exports    = server;
         
         
-        var serverurl;
         var params;
         var on      = {};
         var img     = {};
@@ -90,8 +89,7 @@
         on.request.hello=function(req,res){
         
               res.setHeader('content-type','text/html');
-              var html2   = html.hello.replace('{serverurl}',serverurl);
-              res.end(html2);
+              res.end(html.hello);
               
         }//hello
         
@@ -127,11 +125,9 @@
               
               var {host,port}   = params;
               if(host){
-                    serverurl   = 'https://'+host+':'+port+'/';
-                    
                     console.log('   https server listening,',host,'port',port);
                     console.log();
-                    console.log('   '+serverurl);
+                    console.log('   https://'+host+':'+port+'/');
                     console.log();
                     return;
               }
@@ -143,7 +139,6 @@
               
               function disp(ip){
               
-                    serverurl   = 'https://localhost:'+port+'/';
                     var nics    = require('os').networkInterfaces();
                     var i       = 1;
                     var addr    = [];
@@ -153,7 +148,6 @@
                           
                                 if(o.family==='IPv4'){
                                       addr.push(o.address);
-                                      console.log('         ',i++,':',o.address);
                                 }
                                 
                           });
@@ -161,18 +155,16 @@
                     }//for
                     
                     if(ip){
-                          console.log();
                           console.log('   local ip : '+ip);
-                          serverurl   = 'https://'+ip+':'+port+'/';
+                          console.log();
                     }
-                    console.log();
-                    console.log('   sugguested urls :');
-                    console.log();
+                    
                     addr.forEach(addr=>console.log('      https://'+addr+':'+port+'/'));
                     console.log('      https://localhost:'+port+'/');
                     if(ip){
                           console.log('   https://'+ip+':'+port+'/');
                     }
+                    console.log();
                     console.log();
                     
               }//disp
@@ -520,7 +512,10 @@ html.hello=`
       }
 </style>
 <h1>hello</h1>
-<h2>{serverurl}</h2>
+<h2></h2>
+<script>
+      document.querySelector('h2').textContent=window.location;
+</script>
 `;
 
 html.notfound=`
