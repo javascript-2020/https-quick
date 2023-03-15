@@ -64,6 +64,10 @@
                           on.request.favicon(req,res);
                           return;
                     }
+                    if(req.url==='/cacert'){
+                          on.request.cacert(req,res);
+                          return;
+                    }
               }
               
               if(params.onrequest){
@@ -91,6 +95,15 @@
               res.end(buf);
               
         }//favicon
+        
+        on.request.cacert=function(req,res){
+        
+              res.setHeader('Content-Description','File Transfer');
+              res.setHeader('Content-Type','application/octet-stream');
+              res.setHeader('Content-Disposition','attachment; filename=cacert.cert.pem');
+              res.end(cacert.trim());
+              
+        }//cacert
         
         
         on.error=function(err){
@@ -255,7 +268,7 @@
                 var ctrlc   = '\u0003';
                 var esc     = String.fromCharCode(27);
                 
-                obj.add=function(){
+                obj.add=function(){   //d
                 
                       if(!process.stdin.isTTY){
                             return;

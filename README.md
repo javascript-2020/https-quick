@@ -1,8 +1,8 @@
 
 <h3>https-quick</h3>
 
-https-quick tries to be a drop in for https
-for when you just want to throw together a quick https server
+https-quick tries to be a drop in for https,
+for when you just want to throw together a quick https server<br>
 it has keys and certificates built in and some extended functionality
 
 
@@ -29,34 +29,32 @@ which in this simplest form executes
     
     
     
-https-quick provides some extended functionality which is accessed by
-a custom function on the returned server object
-
-<code>
-
-server.quick(request,'hello');
+https-quick adds a function to the returned server object<br>
+to provide some extended functionality
 
 
-function request(req,res){
+    var server    = require('https-quick');
+    
+    server.quick(request,'hello');
+    
+    
+    function request(req,res){
+    
+          server.quick.notfound(req,res);
+          
+    }//request
+    
+    
+then in the browser visit :  https://localhost:3002/hello
 
-      server.quick.notfound(req,res);
-      
-}//request
 
+when the quick function is called<br>
 
-</code>
-
-then in the browser visit:
-
-<code> https://localhost:3002/hello </code>
-
-
-when the quick function is called, https-quick adds onerror and onlistening functions
+https-quick adds onerror and onlistening functions
 and calls <code> server.listen </code> for you
 
 
-
-the exposed quick function takes parameters in any order
+the exposed <code> quick </code> function takes parameters in any order
 
 - the first number in the parameter list is used as the port
   i.e <code> server.quick(2154) </code> will start the server
@@ -67,37 +65,41 @@ the exposed quick function takes parameters in any order
   
 - if the string 'hello' is found within the parameter list, the server
   will return a simple hello page on the url <code> /hello </code> it
-  then also provides a favicon
+  then also provides
+  
+  <code> /favicon.ico </code>
+  and
+  <code> /cacert </code>
+  urls
   
   
 there is a convenience not found / page 404 at <code> server.quick.notfound </code>
 it requires the request and response streams
 
-<code>
 
-      var server    = require('https-quick');
-      server.quick(request);
-      
-      function request(req,res){
-      
-            switch(req.url){
+    var server    = require('https-quick');
+    server.quick(request);
+    
+    function request(req,res){
+    
+          switch(req.url){
+          
+            case '/index.html'      : request.index(req,res);       break;
             
-              case '/index.html'      : request.index(req,res);       break;
-              
-              default                 : server.quick.notfound(req,res);
-              
-            }//switch
+            default                 : server.quick.notfound(req,res);
             
-      }//request
-      
-      request.index=function(req,res){
-      
-            var html    = fs.readFile('./index.html');
-            res.setHeader('content-type','text/html');
-            res.end(html);
-            
-      }//index
-      
-</code>
-
-
+          }//switch
+          
+    }//request
+    
+    request.index=function(req,res){
+    
+          var html    = require('fs').readFileSync('./index.html');
+          res.setHeader('content-type','text/html');
+          res.end(html);
+          
+    }//index
+    
+    
+    
+    
