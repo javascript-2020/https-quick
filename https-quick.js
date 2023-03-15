@@ -1,13 +1,10 @@
 
 
-
-        console.clear();
-        console.log(process.argv[1]);
-        
         var def   = {
               port    : 3002,
               host    : undefined
         };
+        
         
         var key,cert,cacert;
         setup();
@@ -29,6 +26,8 @@
         
         function quick(port,onrequest){
         
+              console.clear();
+              
               var {port,host,onrequest}   = getparams(arguments);
               
               server.on('request',on.request);
