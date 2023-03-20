@@ -2,32 +2,97 @@
 
         var def   = {
               port    : 3002,
-              host    : undefined
+              host    : ''
         };
         
-        
+        var https,fsp,path,dns,os;
         var key,cert,cacert;
         setup();
         
-        var https         = require('https');
-        var server        = https.createServer({key,cert});
-        server.quick      = quick;
-        
+        var server        = createserver();
+        createapi(server);
         module.exports    = server;
         
         
+  //:
+  
+  
+        function createserver(){
+        
+              var server              = https.createServer({key,cert});
+              return server;
+              
+        }//create
+        
+        function createapi(server){
+        
+              var uquickh             = function(port,onrequest){return quickh.apply(null,arguments)};
+              var uquick_             = function(port,onrequest){return quick_.apply(null,arguments)};
+              var uquick              = function(port,onrequest){return quick.apply(null,arguments)};
+              
+              uquick.ok               = function(req,res,msg){return quick.ok.apply(null,arguments)};
+              uquick.error            = function(req,res,msg){return quick.error.apply(null,arguments)};
+              uquick.notfound         = function(req,res,msg){return quick.notfound.apply(null,arguments)};
+              
+              uquick.url              = function(url,callback){return quick.url.apply(null,arguments)};
+              uquick.url.file         = function(url,file){return quick.url.file.apply(null,arguments)};
+              uquick.url.gen          = function(callback){return quick.url.gen.apply(null,arguments)};
+              uquick.url.rem          = function(url,callback){return quick.url.rem.apply(null,arguments)};
+              
+              uquick.dir              = function(baseurl,dir,exc){return quick.dir.apply(null,arguments)};
+              
+              uquick.req              = {};
+              uquick.req.post         = {};
+              uquick.req.post.json    = function(req){return quick.req.post.json.apply(null,arguments)};
+              
+              uquick.res              = {};
+              uquick.res.html         = function(res,html,ins){return quick.res.html.apply(null,arguments)};
+              uquick.res.json         = function(res,json){return quick.res.json.apply(null,arguments)};
+              uquick.res.file         = function(res,file,ins){return quick.res.file.apply(null,arguments)};
+              
+              uquick.resolve          = function(dir,file){return resolve(dir,file)};
+              uquick.exists           = function(dir,file){return exists(dir,file)};
+              
+              
+              server.quick            = uquick;
+              server.quick_           = uquick_;
+              server.quickh           = uquickh;
+              
+        }//createapi
+        
+        
+  //:
+  
+  
         var params;
+        
         var on      = {};
         var img     = {};
         var html    = {};
+        
         var keys    = keysmod();
-        keys.add();
+        
+        
+        function quickh(){
+        
+              var args    = Array.prototype.slice.call(arguments);
+              args.push('hello');
+              quick.apply(null,args);
+              return quick;
+        }
+        
+        function quick_(){
+        
+              quick.apply(null,arguments);
+              return quick;
+              
+        };
         
         function quick(port,onrequest){
         
               console.clear();
               
-              var {port,host,onrequest}   = getparams(arguments);
+              var {port,host,onrequest,nokeys}   = getparams(arguments);
               
               server.on('request',on.request);
               server.on('listening',on.listening);
@@ -39,23 +104,198 @@
                     server.listen(port);
               }
               
+              if(!nokeys)keys.add();
+              
               return server;
               
         }//quick
         
-        quick.notfound=function(req,res){
+  //:
+  
+        quick.ok=function(req,res,msg='ok'){
+        
+              res.statusCode    = 200;
+              res.setHeader('content-type','text/plain');
+              res.end(msg);
+              
+        }//ok
+        
+        quick.error=function(req,res,msg='error'){
+        
+              res.statusCode    = 400;
+              res.setHeader('content-type','text/plain');
+              res.end(msg);
+              
+        }//error
+        
+        quick.notfound=function(req,res,msg='not found on this server'){
         
               var html2   = html.notfound;
-              html2       = html2.replace('{url}',req.url);
+              html2       = html2.replace('{{url}}',req.url);
+              html2       = html2.replace('{{msg}}',msg);
               res.setHeader('content-type','text/html');
               res.end(html2);
               
         }//notfound
         
         
-        on.request=function(req,res){
+  //:
+  
+  
+        var list    = [];
+        list.find=function(url,type){
+        
+              var n   = list.length;
+              for(var i=0;i<n;i++){
+              
+                    var o   = list[i];
+                    if(o.url===url){
+                          switch(type){
+                            case 'remove'   : list.splice(i,1);       return;
+                            default         : return o.callback;
+                          }
+                    }
+                    
+              }//for
+              
+        }//find
+        
+        quick.url=function(url,callback){
+        
+              list.find(url,'remove');
+              list.push({url,callback});
+              
+        }//url
+        
+        quick.url.file=function(url,file,ins){
+        
+              list.find(url,'remove');
+              list.push({url,callback:{file,ins}});
+              
+        }//file
+        
+        quick.url.gen=function(callback){
+        
+              var url   = '/';
+              var n     = 10;
+              
+              for(var i=0;i<n;i++){
+              
+                    var c;
+                    var index   = Math.floor(Math.random()*62);
+                    
+                    if(index<26){
+                          c   = String.fromCharCode(index+97);
+                    }
+                    if((index>=26)&&(index<52)){
+                          c   = String.fromCharCode((index-26)+65);
+                    }
+                    if(index>=52){
+                          c   = String.fromCharCode((index-52)+48);
+                    }
+                    url  += c;
+                    
+              }//for
+              
+              quick.url(url,callback);
+              return url;
+              
+        }//gen
+        
+        quick.url.rem=function(url){
+        
+              var n   = list.length;
+              for(var i=n-1;i>=0;i--){
+              
+                    var o   = list[i];
+                    if(o.url===url){
+                          list.splice(i,1);
+                          return;
+                    }
+                    
+              }//for
+              
+        }//rem
+        
+        
+        var dir   = [];
+        
+        quick.dir=function(baseurl,dir2,exc=[]){
+        
+              dir.push({baseurl,dir:dir2,exc});
+              
+        }//dir
+        
+        
+  //:
+  
+  
+        quick.req={};
+        quick.req.post={};
+        quick.req.post.json=async function(req){
+        
+              var body    = '';
+              for await(chunk of req)body+=chunk;
+              var post    = JSON.parse(body);
+              return post;
+              
+        }//post
+        
+        quick.res={};
+        quick.res.html=function(res,html,ins={}){
+        
+              for(var key in ins){
+                    html    = html.replaceAll('{{'+key+'}}',ins[key]);
+              }//for
+              
+              res.setHeader('content-type','text/html');
+              res.end(html);
+              
+        }//send
+        
+        quick.res.json=function(res,json){
+        
+              res.setHeader('content-type','application/json');
+              res.end(JSON.stringify(json));
+              
+        }//res
+        
+        quick.res.file=async function(res,file,ins){
+        
+              var ext   = path.extname(file);
+              
+              switch(ext){
+              
+                case 'html'   : res.setHeader('content-type','text/html');    break;
+                
+              }//switch
+              
+              if(ins){
+                    var txt   = await fsp.readFile(file,'utf8');
+                    for(var key in ins){
+                          txt   = txt.replaceAll('{{'+key+'}}',ins[key]);
+                    }
+                    res.end(txt);
+                    return;
+              }
+              
+              var buf   = await fsp.readFile(file);
+              res.end(buf);
+              
+        }//file
+        
+        
+        
+        
+  //:
+  
+  
+        on.request=async function(req,res){
         
               if(params.hello){
+                                                                    //console.log(req.url);
+                    res.setHeader('cache-control','no-store');
+                    
                     if(req.method==='OPTIONS'){
                           cors(res);
                           return;
@@ -75,12 +315,64 @@
                     
               }
               
+              var n   = list.length;
+              for(var i=0;i<n;i++){
+              
+                    var o   = list[i];
+                    if(o.url===req.url){
+                          switch(datatype(o.callback)){
+                            case 'string'           : quick.res.html(res,o.callback);           break;
+                            case 'function'         : o.callback(req,res);                      break;
+                            case 'asyncfunction'    : o.callback(req,res);                      break;
+                            case 'promise'          : o.callback.then({req,res});               break;
+                            case 'object'           :
+                                o   = o.callback;
+                                if('file' in o){
+                                      quick.res.file(res,o.file,o.ins);
+                                }
+                                if('string' in o){
+                                      quick.res.html(res,o.string,o.ins);
+                                }
+                                break;
+                            default : quick.notfound(req,res);
+                          }
+                          return;
+                    }
+                    
+              }//for
+              
+              
+                                                                    //console.log('req',req.url);
+              var n   = dir.length;
+              for(var i=0;i<n;i++){
+              
+                    var o   = dir[i];
+                                                                    //console.log('base',o.baseurl);
+                    if(req.url.startsWith(o.baseurl)){
+                          var file    = req.url.slice(o.baseurl.length);
+                          if(file[0]==='/')file=file.slice(1);
+                                                                    //console.log('file',file);
+                                                                    
+                          if(o.exc.indexOf(file)==-1){
+                                var abs     = await exists(o.dir,file);
+                                                                    //console.log('abs',abs);
+                                if(abs!==false){
+                                      quick.res.file(res,abs);
+                                      return;
+                                }
+                          }
+                    }
+                    
+              }//for
+              
+              
               if(params.onrequest){
                     if(typeof params.onrequest==='function'){
                           params.onrequest(req,res);
                           return;
                     }
               }
+              
               
               quick.notfound(req,res);
               
@@ -89,7 +381,7 @@
         on.request.hello=function(req,res){
         
               res.setHeader('content-type','text/html');
-              res.end(html.hello);
+              res.end(html.itworks);
               
         }//hello
         
@@ -112,6 +404,9 @@
         }//cacert
         
         
+  //:
+  
+  
         on.error=function(err){
         
               console.error(err);
@@ -135,11 +430,11 @@
               console.log('   https server listening - all interfaces, port '+port);
               console.log();
               
-              require('dns').lookup(require('os').hostname(),{family:4},disp);
+              dns.lookup(os.hostname(),{family:4},disp);
               
               function disp(ip){
               
-                    var nics    = require('os').networkInterfaces();
+                    var nics    = os.networkInterfaces();
                     var i       = 1;
                     var addr    = [];
                     for(var key in nics){
@@ -165,15 +460,51 @@
                           console.log('   https://'+ip+':'+port+'/');
                     }
                     console.log();
-                    console.log();
                     
               }//disp
               
         }//listening
         
         
-        function cors(res){
+  //:
+  
+  
+        function resolve(dir,file){
         
+              var p1    = path.resolve(dir);
+              var n     = p1.length;
+              var p2    = path.resolve(dir,file);
+              var s     = p2.substring(0,n);
+              if(s!==p1){
+                    return false;
+              }
+              return p2;
+              
+        }//resolve
+        
+        async function exists(dir,file){
+        
+              var abs   = resolve(dir,file);
+              if(abs===false){
+                    return false;
+              }
+              
+              try{
+                    var stat    = await fsp.stat(abs);
+              }
+              catch(err){
+                    var result    = false;
+              }
+              if(result===false){
+                    return false;
+              }
+              
+              return abs;
+              
+        }//exists
+        
+        function cors(res){
+                                                    console.log('cors');
               var headers   = {
                     'Access-Control-Allow-Origin'     : '*',
                     'Access-Control-Allow-Methods'    : 'OPTIONS, POST, GET',
@@ -190,7 +521,8 @@
               var host;
               var onrequest;
               var request;
-              var hello   = false;
+              var hello     = false;
+              var nokeys    = false;
               
               var arg0    = args[0];
               if(datatype(arg0)==='object'){
@@ -207,11 +539,11 @@
               }
               
               
-              port        = port||def.port;
+              port        = port||def.port++;
               host        = host||def.host;
               onrequest   = onrequest||request;
               
-              params      = {port,host,onrequest,hello};
+              params      = {port,host,onrequest,hello,nokeys};
               return params;
               
               
@@ -232,6 +564,9 @@
                             if(arg==='hello'){
                                   hello   = true;
                                   return;
+                            }
+                            if(arg==='no-keys'){
+                                  nokeys    = true;
                             }
                             switch(++ct.string){
                               case 1    : host    = arg;          break;
@@ -337,6 +672,12 @@
         
         function setup(){
         
+              https   = require('https');
+              fsp     = require('fs').promises;
+              path    = require('path');
+              dns     = require('dns');
+              os      = require('os');
+              
               key     =
 `-----BEGIN RSA PRIVATE KEY-----
 MIIEowIBAAKCAQEAp1/aEck7k7OGlQe373+zEYiznlk0ORrg0UeyDGsULaGyIpG+
@@ -500,15 +841,15 @@ html.hello=`
 <meta name=viewport content='width=device-width, initial-scale=1' />
 <style>
       body {
-        font-family:arial, sans-serif;
-        margin-top:50px;
-        text-align:center;
+        font-family   : arial, sans-serif;
+        margin-top    : 50px;
+        text-align    : center;
       }
       h1 {
-        color:green;
+        color         : green;
       }
       h2 {
-        color:blue;
+        color         : blue;
       }
 </style>
 <h1>hello</h1>
@@ -519,7 +860,7 @@ html.hello=`
 `;
 
 html.notfound=`
-
+<meta name=viewport content='width=device-width, initial-scale=1' />
 <style>
       .root {
         text-align:center;
@@ -550,15 +891,20 @@ html.notfound=`
       }
       
       .url {
-        margin: 25px 0 50px;
+        margin: 25px 0;
         font-weight:bold;
+        color:blue;
+      }
+      
+      .msg {
+        margin: 25px 0;
         color:blue;
       }
       
       .btns {
         display:flex;
         gap:10px;
-        margin-top: 25px;
+        margin-top: 50px;
       }
       
       button {
@@ -583,7 +929,8 @@ html.notfound=`
       <span class=code>404</span>
       <span class=notfound>not found</span>
     </div>
-    <div class=url>{url}</div>
+    <div class=url>{{url}}</div>
+    <div class=msg>{{msg}}</div>
     <div class=btns>
       <button class=back>BACK</button>
       <button class=reload>RELOAD</button>

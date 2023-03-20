@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <style>
+      html {
+        height:100%;
+      }
+      body {
+        display:flex;
+        flex-flow:column;
+        height:100%;
+        margin:0;
+      }
+      
+      #hdr {
+        margin-bottom:20px;
+      }
+      #main {
+        flex:1;
+        display:flex;
+        gap:10px;
+      }
+      iframe {
+        width:100%;
+        height:100%;
+        box-sizing:border-box;
+      }
+      input {
+            padding: 5px 10px;
+            font-size:18px;
+      }
+      input[type=button] {
+            cursor:pointer;
+      }
+      
+    </style>
+  </head>
+  <body>
+  
+    <div id=hdr>
+      <input id=addbtn value='add user' type=button>
+    </div>
+    
+    <div id=main>
+    </div>
+    
+    <template id=view>
+      <iframe>
+      </iframe>
+    </template>
+    
+    <script>
+    
+          addbtn.onclick=add;
+          function add(){
+                var iframe=view.content.firstElementChild.cloneNode(true);
+                iframe.src='/chat';
+                main.append(iframe);
+          }//add
+          
+    </script>
+    
+  </body>
+</html>

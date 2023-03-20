@@ -1,0 +1,201 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <style>
+    
+      html {
+        height:100%;
+        font-size:18px;
+        font-family:arial;
+      }
+      body {
+        --margin:20px;
+        height:calc(100% - var(--margin));
+        display:flex;
+        flex-flow:column;
+        margin:var(--margin);
+        gap:20px;
+      }
+      
+      #output {
+        border:1px solid lightgray;
+        flex:1;
+        padding:20px;
+        overflow:auto;
+      }
+      
+      .msg-root {
+            margin-bottom:20px;
+      }
+      .name {
+            display:inline-block;
+            width:75px;
+            margin-right:20px;
+      }
+      .msg {
+            padding:5px 20px;
+            border-radius:6px;
+      }
+      
+      #root {
+        margin-bottom:50px;
+      }
+      
+      #input-root {
+        display:flex;
+        gap:20px;
+        align-items:center;
+      }
+      #user {
+        width:100%;
+        margin:10px auto;
+        flex:1;
+      }
+      
+      #control {
+        position:relative;
+        margin-top:30px;
+        padding:20px;
+      }
+      
+      @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+      }
+      
+      #spinner {
+        position:absolute;
+        right:20px;
+        bottom:20px;
+        animation: spin 1s linear infinite;
+      }
+      
+      input {
+            padding: 5px 10px;
+            font-size:18px;
+      }
+      input[type=button] {
+            cursor:pointer;
+      }
+      
+    </style>
+  </head>
+  <body>
+  
+    <div id=output></div>
+    <div id=root>
+      <div id=input-root>
+        <span id=name></span>
+        <input id=user autocomplete=off spellcheck=false>
+        <input id=send value=send type=button>
+      </div>
+      <div id=control>
+        <input id=updatebtn value=update type=button>
+        <input id=stopbtn value=stop type=button>
+      </div>
+      <img id=spinner src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAYAAABb0P4QAAAAAXNSR0IArs4c6QAAA8JJREFUOE+Vk39oG2UYx5/3vcsld9f8umRd22ilVtApytaa1Da1zjq6zSm00kBRdKKsCDoRBIdO8QduU7RDZOAcU2RQFbqxwZwbsyvr1q5r0w5/DYe4prazW0pyvWvSyyWXu1fe08Gordb3jxfe577fz3s8z/dF8C9LqW1oMXju1RmRrzcRgvKsNuTIFXb5xs6dXMqGlvqQqYk0z5WI+7tLXFV9mTlbFhYEeNJEU+Wy8rT7wkjfYt5FgeSeFlF1aQd7gu4NX6gKhNfcPcyyTCb+w8XmTbyAO1PZE15daEc/npxfCF0UqITDtxpO4cybTiaklErTzz7e1nbnHasSr+/s6tcSU6s+tJiEmMuu88Xj48sCanV1N+VNfGZ3oKRqBEG+/dF126nx+KmB18rUeWm7QRL+vNYkDA9fWRaQxGKMcnly329B/zO7CxpcRcikRlexyGwr8cLqZPpzX3VlJ+rpses3riWHotbUrzfBOnwl4OXPOxjbs6ZIoDo1q7AYPeIZPT+47KFQ4Vy4vqFoWr0AkEcYz9IasSw/QaA7AD/oGRu69P+AkYZXjKL5IgKiA6AKGwgg22fMfCSNDu35TyCNS45X/bqJW8GyXgYgJgFUvcD4B8Y4bSG8U8qL38DtXv3GXto9pDHBwG0xWVSfZ5gqrlAMQbGYIQA0Z6EFTVdoHQH4LI67yGCYREUzziHzSzp1lA03rNZZ5tMhvzt81ihQL2rinBBJqxm2UJj5xx8iuEZFP5UGyvosgxAAiLAcuW9OO+3U9OeRWnf/sbNBz8b3FBmVrgzKVDyTTEnbfBI0JuWERSweCKywbwLIAJD092XByg8yqoP1ujWOc+jJZEra6pNIy2z2EJp+oFnbwQJ/1SvKHW2bnqDGrw8f6y5X56W3NMPE+cK1vwZjI1nLyYU+9rjYCw5G62h9eCvn5KaPfNv7mZBMVbxj4hwF5t5lwUWfWOdT7a3Utu/AwSO+Gbnibc0wmXx+AgPqtwAcANAEDFO5yyegy25e3tzxWEcotHL8k/3dR+mT7CKsjpRI44njK7zr9ygy3FJZMUWBv09O3/yCT4INaXWANclzJfHBX2hdjURrihjvPRfw1L7/t553udRLv47ftdnrQzE5M4CUSPReg8F7v5M8tady87TH8BAvosaMNhHQCzFhZHAM2RG0N5SJRBuznOOr014xRPWaZcFaQUQbs/qElMttQVSkRaK1eYxfyrHMWmrkDfNnzix0iaPDvddh16ND9XI4GgMgb+QE1230JlE3+lli7XCPDA78Cf/WoEFgoZ8FAAAAAElFTkSuQmCC'>
+    </div>
+    
+    
+    <script>
+    
+      console.clear();
+      var spinner=$('#spinner');
+      spinner.remove();
+      
+      var mode='auto';
+      var name,col;
+      switch(mode){
+        case 'user'   :
+            name='matt';
+            col='blue';
+            break;
+        case 'auto'   :
+            name='{{name}}';
+            col='{{col}}';
+            break;
+        case 'prompt' :
+            name=prompt('enter name');
+            col=prompt('enter colour');
+            break;
+      }//switch
+      $('#name').textContent=name;
+      
+      var abort=false;
+      var timer;
+      
+      updatebtn.onclick=e=>{
+            abort=false;
+            update();
+      };
+      stopbtn.onclick=e=>{
+            abort=true;
+            clearTimeout(timer);
+      }
+      
+      post('/join',{name,col});
+      update();
+      user.focus();
+      
+      user.onkeyup=e=>{
+            if(e.key==='Enter'){
+                  var msg   = user.value;
+                  add(name,col,msg);
+                  post('/'+name,{type:'msg',msg});
+                  user.value='';
+                  user.focus();
+            }
+      };
+      async function update(){
+            root.append(spinner);
+            var msg   = await post('/'+name,{type:'update'});
+            spinner.remove();
+            msg.forEach(o=>add(o.name,o.col,o.msg));
+            if(abort){
+                  return;
+            }
+            timer=setTimeout(update,1000);
+      }//update
+      function add(name,col,str){
+            var root    = Tmsg.content.firstElementChild.cloneNode(true);
+            $('.name',root).textContent=name;
+            $('.name',root).style.color=col;
+            $('.name',root).style.borderBottom='1px solid '+col;
+            $('.msg',root).textContent=str;
+            $('.msg',root).style.color=col;
+            $('.msg',root).style.border='1px solid '+col;
+            output.append(root);
+            output.scrollTop=output.scrollHeight;
+      }//add
+      async function post(url,data={}){
+      
+            var response    = await fetch(url,{
+                  method    : 'post',
+                  headers   : {'content-type':'application/json'},
+                  body      : JSON.stringify(data),
+            });
+            try{
+              var json=await response.json();
+            }
+            catch(err){}
+            return json;
+            
+      }//post
+      function $(v,node){return (node||document).querySelector(v)}
+      
+    </script>
+    
+    <template id=Tmsg>
+      <div class=msg-root>
+        <span class=name></span>
+        <span class=msg></span>
+      </div>
+    </template>
+  </body>
+</html>
+
