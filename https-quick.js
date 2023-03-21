@@ -79,19 +79,18 @@
               args.push('hello');
               quick.apply(null,args);
               return quick;
-        }
+              
+        }//quickh
         
         function quick_(){
         
               quick.apply(null,arguments);
               return quick;
               
-        };
+        }//quick_
         
         function quick(port,onrequest){
         
-              if(server.quick)return server;
-              
               console.clear();
               
               var {port,host,onrequest,nokeys}   = getparams(arguments);
@@ -199,7 +198,9 @@
                     
               }//for
               
-              quick.url(url,callback);
+              if(callback){
+                    quick.url(url,callback);
+              }
               return url;
               
         }//gen
@@ -227,6 +228,23 @@
               dir.push({baseurl,dir:dir2,exc});
               
         }//dir
+        
+        quick.dir.rem=function(baseurl,dir){
+        
+              var n   = dir.length;
+              for(var i=0;i<n;i++){
+              
+                    var o   = dir[i];
+                    if(o.baseurl===baseurl){
+                          if(o.dir===dir){
+                                dir.splice(i,1);
+                                return;
+                          }
+                    }
+                    
+              }//for
+              
+        }//rem
         
         
   //:
@@ -326,7 +344,7 @@
                             case 'string'           : quick.res.html(res,o.callback);           break;
                             case 'function'         : o.callback(req,res);                      break;
                             case 'asyncfunction'    : o.callback(req,res);                      break;
-                            case 'promise'          : o.callback.then({req,res});               break;
+                          //case 'promise'          : o.callback.then({req,res});               break;
                             case 'object'           :
                                 o   = o.callback;
                                 if('file' in o){
