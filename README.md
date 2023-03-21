@@ -69,11 +69,11 @@ to provide extended functionality<br>
           
     }//request
     
+    
     //https://localhost:3002/hello
     
 </pre>
 
-<br>
 <br>
 
 when the quick function is called https-quick<br>
@@ -86,7 +86,7 @@ when the quick function is called https-quick<br>
 the exposed <code> quick </code> function takes parameters in any order
 
 - the first number in the parameter list is used as the port
-  i.e <code> server.quick(2154) </code> will start the server
+  i.e <code> quick(2154) </code> will start the server
   listening on port 2154
   
 - the first function in the parameter list will be used for the
@@ -102,19 +102,20 @@ the exposed <code> quick </code> function takes parameters in any order
   
 - if the string 'nokeys' is not present
 
-  - adds keyboard event to the console allow escape to be pressed to quit the process
+  - adds keyboard event to allow escape to be pressed to quit the process
   
 <br>
 
 <pre>
 
-      var server    = require('https-quick').<b>quick(2154,'hello')</b>;
+      var server    = require('https-quick').<b>quick(2154,'hello','nokeys')</b>;
       
 </pre>
 <br>
 
 <h4>quick_(port,onrequest,'hello')</h4>
-this calls the <code> quick </code> function but returns the quick function for ease of use<br><br>
+- calls the <code> quick </code> function with the given parameters<br>
+- returns the quick function for ease of use<br><br>
 
 <pre>
 
@@ -124,7 +125,9 @@ this calls the <code> quick </code> function but returns the quick function for 
 <br>
 
 <h4>quickh(port,onrequest,'hello')</h4>
-this calls the <code> quick_ </code> function and automatically adds the 'hello' parameter<br><br>
+- calls the <code> quick_ </code> function with the given parameters
+- automatically adds the 'hello' parameter<br>
+<br>
 
 <pre>
 
