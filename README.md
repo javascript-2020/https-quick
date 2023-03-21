@@ -634,7 +634,9 @@ example useage:
 
 <pre>
 
-      require('https-quick.js').quickh().dir('/','',['server.js']);
+      var quick   = require('https-quick.js').quickh();
+      
+      quick.dir('/','',['server.js']);
       
 </pre>
 
