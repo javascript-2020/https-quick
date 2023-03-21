@@ -132,8 +132,7 @@ this is a convenience '200 ok'<br>
   - the response has statusCode 200
   - the response has content-type text/plain
   - the response has body that contains the text in msg
-<br>
-
+  
 <pre>
 
       var server   = require('https-quick');
