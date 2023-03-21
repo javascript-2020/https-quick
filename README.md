@@ -127,6 +127,7 @@ this calls the <code> quick_ </code> function and automatically adds the 'hello'
 
 <h4>quick.ok(req,res,msg='ok')</h4>
 this is a convenience '200 ok'<br>
+
   - it requires the request and response streams as arguments
   - the response has statusCode 200
   - the response has content-type text/plain
