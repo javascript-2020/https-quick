@@ -20,8 +20,9 @@ https-quick provides a https certificate and ca certificate for<br>
 <br>
 other domains and ips can be used with the familiar warning
 <br>
+<br>
 
-<h4>installation</h4>
+<h3>installation</h3>
 
 <pre>
 
@@ -30,7 +31,7 @@ other domains and ips can be used with the familiar warning
 </pre>
 
 
-<h4>useage</h4>
+<h3>useage</h3>
 
 <pre>
 
