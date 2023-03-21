@@ -116,7 +116,7 @@ this calls the <code> quick </code> function but returns the quick function for 
 <br>
 
 <h4>quickh(port,onrequest,'hello')</h4>
-this calls the <code> quick_ </code> function and automatically adds the 'hello' parameter<br>
+this calls the <code> quick_ </code> function and automatically adds the 'hello' parameter<br><br>
 
 <pre>
 
