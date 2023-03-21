@@ -225,7 +225,7 @@ this function allows to quickly add a url to serve
 
       var quick   = require('https-quick').quickh();
       
-      quick.url('/index.html',`
+      <b>quick.url('/index.html',`
             &lt;html>
                   &lt;head>
                   &lt;/head>
@@ -233,7 +233,7 @@ this function allows to quickly add a url to serve
                         &lt;h1>welcome&lt;/h1>
                   &lt;/body>
             &lt;/html>
-      `);
+      `);</b>
       
       
 </pre>
@@ -242,7 +242,7 @@ this function allows to quickly add a url to serve
 
       var quick   = require('https-quick').quickh();
       
-      quick.url('/index.html',{file:'index.html',ins:{name:'matt'}});
+      <b>quick.url('/index.html',{file:'index.html',ins:{name:'matt'}});</b>
       
 </pre>
 
@@ -258,7 +258,7 @@ this function allows to quickly add a url to serve
                   &lt;/body>
             &lt;/html>
       `;
-      quick.url('/index.html',{string:'index.html',ins:{name:'matt'}});
+      <b>quick.url('/index.html',{string:html,ins:{name:'matt'}});</b>
       
 </pre>
 <br>
