@@ -157,9 +157,10 @@ this produces '400 Bad Request' response<br>
 <pre>
 
       var server   = require('https-quick');
+      
       server.on('request',(req,res)=>{
       
-            server.quick.error(req,res,'an error occurred');
+            <b>server.quick.error(req,res,'an error occurred');</b>
             
       });
       
