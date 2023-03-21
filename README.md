@@ -561,21 +561,25 @@ example useage:
 
 <pre>
 
-    var server    = require('https-quick').quick(request,'hello');
+    var server    = require('https-quick');
+    
+    server.on('request',request);
+    server.on('error',console.error);
+    server.listen(3002,()=>console.log('server listening'));
     
     function request(req,res){
     
           switch(req.url){
           
-            case '/index.html'      : request.index(req,res);       break;
+            case '/index.html'      : index(req,res);       break;
             
-            default                 : <b>server.quick.notfound(req,res);</b>
+            default                 : notfound(req,res);
             
           }//switch
           
     }//request
     
-    request.index=async function(req,res){
+    async function index(req,res){
     
           var html    = await require('fs').promises.readFile('./index.html');
           res.setHeader('content-type','text/html');
@@ -583,11 +587,18 @@ example useage:
           
     }//index
     
+    function notfound(req,res){
+    
+          res.statusCode    = 404;
+          res.end();
+          
+    }//notfound
+    
 </pre>
 
 <pre>
 
-    require('./https-quick').quick((req,res)=>{
+    require('https-quick').quick((req,res)=>{
     
           res.setHeader('content-type','text/html');
           res.end(`
@@ -613,52 +624,11 @@ example useage:
 
 <pre>
 
-    var server    = require('./https-quick').quick(request);
-    
-    function request(req,res){
-    
-          var file    = chk(req,res);
-          if(!file)return;
-          
-          var data    = require('fs').readFileSync(file);
-          res.end(data);
-          
-    }//request
-    
-    function chk(req,res){
-    
-          var file    = req.url.slice(1);
-          file        = file||'index.html';
-          
-          var p1      = require('path').resolve(__dirname,file).substring(0,__dirname.length);
-          if(p1!==__dirname){
-                server.quick.notfound(req,res);
-                return false;
-          }
-          
-          var abs   = __dirname+'/'+file;
-          
-          try{
-                require('fs').statSync(abs);
-          }
-          catch(err){
-                console.error(err);
-                server.quick.notfound(req,res);
-                return false;
-          }
-          return abs;
-          
-    }//chk
-    
-</pre>
-
-
-<pre>
-
-      var quick   = require('../https-quick.js').quickh();
-      quick.dir('/','');
+      require('https-quick.js').quickh().dir('/','',['server.js']);
       
 </pre>
+
+see github examples directory for more woking examples
 
 
 
