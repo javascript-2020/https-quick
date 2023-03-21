@@ -106,7 +106,7 @@ the exposed <code> quick </code> function takes parameters in any order
 <br>
 
 <h4>quick_(port,onrequest,'hello')</h4>
-this calls <code> quick </code> but returns the quick function for ease of use<br><br>
+this calls the <code> quick </code> function but returns the quick function for ease of use<br><br>
 
 <pre>
 
@@ -116,8 +116,7 @@ this calls <code> quick </code> but returns the quick function for ease of use<b
 <br>
 
 <h4>quickh(port,onrequest,'hello')</h4>
-there is another function <code> quickh </code> whcih calls <code> quick_ </code>
-and automatically adds the 'hello' parameter
+this calls the <code> quick_ </code> function and automatically adds the 'hello' parameter<br>
 
 <pre>
 
