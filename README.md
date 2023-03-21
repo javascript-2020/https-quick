@@ -611,7 +611,8 @@ example useage:
     
           res.setHeader('content-type','text/html');
           res.end(`
-                &lt;div id=center style='position:relative;top:33%;text-align:center;font-family:arial;font-weight:bold;'>
+                &lt;div id=center style='position:relative;top:33%;text-align:center;
+                                         font-family:arial;font-weight:bold;'>
                     &lt;div id=time style='font-size:42px;color:green'>&lt;/div>
                     &lt;div id=date style='font-size:32px;color:blue;margin-top:20px'>&lt;/div>
                 &lt;/div>
