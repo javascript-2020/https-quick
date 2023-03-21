@@ -489,14 +489,13 @@ if the insert parameter is given the file is converted to text and search and re
       
 </pre>
 <br>
-<br>
 
 <h4>quick.resolve(dir,file)</h4>
 
 a convenience function to test if the given file resolves into directory dir
   - returns the absolute filename if true
   - false on failure
-<br>
+  
 <pre>
 
       var quick   = require('https-quick').quickh();
@@ -520,14 +519,14 @@ a convenience function to test if the given file resolves into directory dir
       
 </pre>
 <br>
-<br>
+
 
 <h4>quick.exists(dir,file)</h4>
 
 a convenience function to test if a given file <code> file </code> exists in directory <code> dir </code>
 return a promise that resolves into the absolute filename if true
-or false on failure
-<br>
+or false on failure<br>
+
 <pre>
 
       var quick   = require('https-quick').quickh();
@@ -550,13 +549,12 @@ or false on failure
       }//main
       
 </pre>
-
-
-<br>
 <br>
 
----
+<br>
 
+  ---
+  
 <br>
 <br>
 
