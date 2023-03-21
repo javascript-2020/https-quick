@@ -537,7 +537,7 @@ or false on failure<br>
       
             var json    = await quick.req.post.json(req);
             
-            var abs     = <b>quick.exists('static/',json.file);</b>
+            var abs     = await <b>quick.exists('static/',json.file);</b>
             
             if(abs===false){
                   quick.error(req,res,'invalid filename');
@@ -555,10 +555,9 @@ or false on failure<br>
 
   ---
   
-<br>
-<br>
-
+  
 example useage:
+<br>
 
 <pre>
 
