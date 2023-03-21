@@ -21,6 +21,8 @@ https-quick provides a https certificate and ca certificate for<br>
 other domains and ips can be used with the familiar warning
 <br>
 
+<h4>installation</h4>
+
 <pre>
 
     npm install https-quick
@@ -28,7 +30,7 @@ other domains and ips can be used with the familiar warning
 </pre>
 
 
-useage:
+<h4>useage</h4>
 
 <pre>
 
