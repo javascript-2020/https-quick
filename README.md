@@ -126,7 +126,7 @@ this calls the <code> quick_ </code> function and automatically adds the 'hello'
 <br>
 
 <h4>quick.ok(req,res,msg='ok')</h4>
-this is a convenience '200 ok'<br>
+this produces '200 ok' response<br>
 
   - it requires the request and response streams as arguments
   - the response has statusCode 200
@@ -147,12 +147,13 @@ this is a convenience '200 ok'<br>
 <br>
 
 <h4>quick.error(req,res,msg='error')</h4>
-this is a convenience '400 Bad Request'
+this produces '400 Bad Request' response<br>
+
   - it requires the request and response streams as arguments
   - the response has statusCode 400
   - the response has content-type text/plain
   - the response has body that contains the text in msg
-<br>
+  
 <pre>
 
       var server   = require('https-quick');
