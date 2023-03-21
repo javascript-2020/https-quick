@@ -36,11 +36,10 @@ which in this simplest form executes
     
 </pre>
 <br>
-https-quick provides a https certificate for<br><br>
-  - ip's : 127.0.0.1 and 127.0.0.2,<br><br>
-    https://127.0.0.1:3002/ https://127.0.0.2:3002/<br><br>
-  - dns names : localhost and tst-server,<br><br>
-    https://localhost:3002/ https://tst-server:3002/<br><br>
+<br>
+https-quick provides a https certificate for<br>
+  - ip's : 127.0.0.1 and 127.0.0.2, i.e https://127.0.0.1:3002/ and https://127.0.0.2:3002/<br>
+  - dns names : localhost and tst-server, i.e https://localhost:3002/ and https://tst-server:3002/
 <br>
 <br>
 
@@ -48,7 +47,6 @@ https-quick provides a https certificate for<br><br>
 
 https-quick adds a function named <code> quick </code> to the returned server object<br>
 to provide extended functionality
-<br>
 <br>
 <pre>
 
@@ -65,7 +63,7 @@ to provide extended functionality
     
 </pre>
 
-https://localhost:3002/hello
+visit : https://localhost:3002/hello
 
 <br>
 <br>
@@ -75,10 +73,8 @@ when the quick function is called https-quick<br>
 - adds onerror and onlistening functions
 - calls <code> server.listen </code>
 - returns the server object for chaining
-
 <br>
 <br>
-
 the exposed <code> quick </code> function takes parameters in any order
 
 - the first number in the parameter list is used as the port
@@ -101,11 +97,13 @@ the exposed <code> quick </code> function takes parameters in any order
   - adds keyboard event to the console allow escape to be pressed to quit the process
   
 <br>
+
 <pre>
 
       var server    = require('https-quick').<b>quick(2154,'hello')</b>;
       
 </pre>
+
 <br>
 
 <h4>quick_(port,onrequest,'hello')</h4>
