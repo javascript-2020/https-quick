@@ -36,12 +36,16 @@ which in this simplest form executes
     
 </pre>
 <br>
+https-quick provides a https certificate for<br>
+  - ip's :
+    - 127.0.0.1, https://127.0.0.1:3002/
+    - 127.0.0.2, https://127.0.0.2:3002/<br>
+  - dns names :
+    - localhost, https://localhost:3002/
+    - tst-server, https://tst-server:3002/
+<br>
 https-quick adds a function named <code> quick </code> to the returned server object<br>
 to provide extended functionality<br>
-<br>
-https-quick provides a https certificate for<br>
-  - ip's : 127.0.0.1 and 127.0.0.2, i.e https://127.0.0.1:3002/ and https://127.0.0.2:3002/<br>
-  - dns names : localhost and tst-server, i.e https://localhost:3002/ and https://tst-server:3002/
 <br>
 <br>
 
