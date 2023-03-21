@@ -137,7 +137,7 @@ the exposed <code> quick </code> function takes parameters in any order
 <br>
 
 <h4>quick.ok(req,res,msg='ok')</h4>
-this produces a '200 ok' response<br>
+sends a '200 ok' response<br>
 
   - it requires the request and response streams as arguments
   - the response has statusCode 200
@@ -158,7 +158,7 @@ this produces a '200 ok' response<br>
 <br>
 
 <h4>quick.error(req,res,msg='error')</h4>
-this produces a '400 Bad Request' response<br>
+sends a '400 Bad Request' response<br>
 
   - it requires the request and response streams as arguments
   - the response has statusCode 400
@@ -179,7 +179,7 @@ this produces a '400 Bad Request' response<br>
 <br>
 
 <h4>quick.notfound(req,res,msg='not found on this server')</h4>
-this produces a '404 not found' response
+sends a '404 not found' response
 
   - it requires the request and response streams as arguments
   - the response has statusCode 404
@@ -201,7 +201,7 @@ this produces a '404 not found' response
 
 <h4>quick.url(url,callback)</h4>
 
-this function allows to quickly add a url to serve
+add a url to serve
 
   - url, the url to serve, if the url already exists it is removed
   
@@ -209,7 +209,6 @@ this function allows to quickly add a url to serve
   
     - a function to be called when a request for the url is made, the function is called with arguments req,res
     - a string taken to be html and given in response
-    - a promise which is then resolved with arguments req,res
     - an object
     
       - if the object has a 'file' key this is taken as a filename
