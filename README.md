@@ -469,7 +469,6 @@ send a json response
       
 </pre>
 <br>
-<br>
 
 <h4>quick.res.file(res,file,insert)</h4>
 
