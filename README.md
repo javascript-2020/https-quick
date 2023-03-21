@@ -380,9 +380,10 @@ removes the given from the current list<br>
 
 <h4>quick.dir(base,dir,exclude)</h4>
 
-quickly serve the files in dir <code> dir </code> from the url stating with <code> base </code>
-the exclude parameter is an array of relative paths from <code> dir </code> to exclude from serving
-<br>
+serve the files in directory <code> dir </code><br>
+from the url starting with <code> base </code><br>
+the exclude parameter is an array of relative paths from <code> dir </code> to exclude from serving<br>
+
 <pre>
 
       var quick   = require('https-quick').quickh();
@@ -390,7 +391,6 @@ the exclude parameter is an array of relative paths from <code> dir </code> to e
       <b>quick.dir('/','',['server.js']);</b>
       
 </pre>
-<br>
 <br>
 
 <h4>quick.req.post.json(req)</h4>
