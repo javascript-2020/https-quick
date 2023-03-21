@@ -125,7 +125,7 @@ the exposed <code> quick </code> function takes parameters in any order
 <br>
 
 <h4>quickh(port,onrequest,'hello')</h4>
-- calls the <code> quick_ </code> function with the given parameters
+- calls the <code> quick_ </code> function with the given parameters<br>
 - automatically adds the 'hello' parameter<br>
 <br>
 
@@ -137,7 +137,7 @@ the exposed <code> quick </code> function takes parameters in any order
 <br>
 
 <h4>quick.ok(req,res,msg='ok')</h4>
-this produces '200 ok' response<br>
+this produces a '200 ok' response<br>
 
   - it requires the request and response streams as arguments
   - the response has statusCode 200
@@ -158,7 +158,7 @@ this produces '200 ok' response<br>
 <br>
 
 <h4>quick.error(req,res,msg='error')</h4>
-this produces '400 Bad Request' response<br>
+this produces a '400 Bad Request' response<br>
 
   - it requires the request and response streams as arguments
   - the response has statusCode 400
@@ -179,7 +179,7 @@ this produces '400 Bad Request' response<br>
 <br>
 
 <h4>quick.notfound(req,res,msg='not found on this server')</h4>
-this produces '404 not found' response
+this produces a '404 not found' response
 
   - it requires the request and response streams as arguments
   - the response has statusCode 404
@@ -265,7 +265,7 @@ this function allows to quickly add a url to serve
                   &lt;head>
                   &lt;/head>
                   &lt;body>
-                        &lt;h1>welcome {{name}}</h1>
+                        &lt;h1>welcome {{name}}&lt;/h1>
                   &lt;/body>
             &lt;/html>
       `;
@@ -413,15 +413,13 @@ returns a promise which resolves to a javascript json value
 
       var quick   = require('https-quick').quickh();
       
-      quick.url('/test',test);
-      
-      async function test(req,res){
+      quick.url('/test',async (req,res)=>{
       
             var json    = await <b>quick.req.post.json(req);</b>
             
             console.log(json);
             
-      }//test
+      });
       
 </pre>
 <br>
