@@ -195,11 +195,12 @@ this function allows to quickly add a url to serve
   - url, the url to serve, if the url already exists it is removed
   
   - callback, can take a number of forms
-<br>
+  
     - a function to be called when a request for the url is made, the function is called with arguments req,res
     - a string taken to be html and given in response
     - a promise which is then resolved with arguments req,res
     - an object
+    
       - if the object has a 'file' key this is taken as a filename
         if the object has a 'ins' key this is used to search and replace within the file text
         
