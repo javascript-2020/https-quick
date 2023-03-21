@@ -1,9 +1,9 @@
 
 <h3>https-quick</h3>
 
-https-quick tries to be a drop in for https,
+https-quick is a drop in for require('https')<br>
+it has keys and certificates built in and some additional functionality<br>
 for when you just want to throw together a quick https server<br>
-it has keys and certificates built in and some extra functionality
 
 <pre>
 
