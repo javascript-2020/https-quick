@@ -206,12 +206,12 @@ this function allows to quickly add a url to serve
         
       - if the object has a 'string' key this is taken as html
         if the object has a 'ins' key this is used to search and replace within the html
-<br>
+        
 <pre>
 
       var quick   = require('https-quick').quickh();
       
-      quick.url('/index.html',index);
+      <b>quick.url('/index.html',index);</b>
       
       function index(req,res){
       
