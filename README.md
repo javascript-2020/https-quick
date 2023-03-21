@@ -5,7 +5,7 @@ https-quick is a drop in for require('https')<br>
 it has keys and certificates built in and some additional functionality<br>
 for when you just want to throw together a quick https server<br>
 <br>
-https-quick provides a https certificate for<br>
+https-quick provides a https certificate and ca certificate for<br>
 
   - ip's :
   
@@ -17,6 +17,8 @@ https-quick provides a https certificate for<br>
     - localhost, https://localhost:3002/
     - tst-server, https://tst-server:3002/
     
+<br>
+other domains and ips can be used with the familiar warning
 <br>
 
 <pre>
