@@ -90,6 +90,8 @@
         
         function quick(port,onrequest){
         
+              if(server.quick)return server;
+              
               console.clear();
               
               var {port,host,onrequest,nokeys}   = getparams(arguments);

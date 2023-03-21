@@ -37,14 +37,12 @@ which in this simplest form executes
 </pre>
 <br>
 
-<h4>server.quick</h4>
+<h4>quick(port,onrequest,'hello')</h4>
 
 https-quick adds a function named <code> quick </code> to the returned server object<br>
 to provide extended functionality
-
 <br>
 <br>
-
 <pre>
 
     var server    = require('https-quick');
@@ -100,10 +98,9 @@ the exposed <code> quick </code> function takes parameters in any order
 </pre>
 <br>
 
-<h4>server.quick_</h4>
-there is another function <code> quick_ </code> which calls <code> quick </code>
-but returns the quick object for ease of use
-
+<h4>quick_(port,onrequest,'hello')</h4>
+this calls <code> quick </code> but returns the quick function for ease of use
+<br>
 <pre>
 
       var quick   = require('https-quick').<b>quick_(2154,'hello')</b>;
@@ -111,7 +108,7 @@ but returns the quick object for ease of use
 </pre>
 <br>
 
-<h4>server.quickh</h4>
+<h4>quickh(port,onrequest,'hello')</h4>
 there is another function <code> quickh </code> whcih calls <code> quick_ </code>
 and automatically adds the 'hello' parameter
 
@@ -122,13 +119,13 @@ and automatically adds the 'hello' parameter
 </pre>
 <br>
 
-<h4>quick.ok</h4>
-there is a convenience '200 ok' at <code> quick.ok(req,res,msg='ok') </code>
+<h4>quick.ok(req,res,msg='ok')</h4>
+this is a convenience '200 ok'
   - it requires the request and response streams as arguments
-  - it returns statusCode 200
-  - it has content-type text/plain
-  - it has body that contains the text in msg
-  
+  - the response has statusCode 200
+  - the response has content-type text/plain
+  - the response has body that contains the text in msg
+<br>
 <pre>
 
       var server   = require('https-quick');
@@ -141,13 +138,13 @@ there is a convenience '200 ok' at <code> quick.ok(req,res,msg='ok') </code>
 </pre>
 <br>
 
-<h4>quick.error</h4>
-there is a convenience '400 Bad Request' as <code> quick.error(req,res,msg='error') </code>
+<h4>quick.error(req,res,msg='error')</h4>
+this is a convenience '400 Bad Request'
   - it requires the request and response streams as arguments
-  - it returns statusCode 400
-  - it has content-type text/plain
-  - it has body that contains the text in msg
-  
+  - the response has statusCode 400
+  - the response has content-type text/plain
+  - the response has body that contains the text in msg
+<br>
 <pre>
 
       var server   = require('https-quick');
@@ -160,15 +157,17 @@ there is a convenience '400 Bad Request' as <code> quick.error(req,res,msg='erro
 </pre>
 <br>
 
-<h4>quick.notfound</h4>
-there is a convenience '404 not found' at <code> quick.notfound(req,res) </code>
+<h4>quick.notfound(req,res,msg='not found on this server'</h4>
+this is a convenience '404 not found'
   - it requires the request and response streams as arguments
-  - it returns statusCode 404
-  - it has content-type text/html
-  
+  - the response has statusCode 404
+  - the response has content-type text/html
+  - the response has body that contains the text from msg
+<br>
 <pre>
 
       var server   = require('https-quick');
+      
       server.on('request',(req,res)=>{
       
             server.quick.notfound(req,res,'was not found on this server');
@@ -182,9 +181,10 @@ there is a convenience '404 not found' at <code> quick.notfound(req,res) </code>
 
 this function allows to quickly add a url to serve
 
-  url       - the url to serve, if the url already exists it is removed
+  - url       - the url to serve, if the url already exists it is removed
   
-  callback  - can take a number of forms
+  - callback  - can take a number of forms
+  <br>
               - a function to be called when a request for the url is made, the function is called with arguments req,res
               - a string taken to be html and given in response
               - a promise which is then resolved with arguments req,res
@@ -214,13 +214,13 @@ this function allows to quickly add a url to serve
       var quick   = require('https-quick').quickh();
       
       quick.url('/index.html',`
-            <html>
-                  <head>
-                  </head>
-                  <body>
-                        <h1>welcome</h1>
-                  </body>
-            </html>
+            &lt;html>
+                  &lt;head>
+                  &lt;/head>
+                  &lt;body>
+                        &lt;h1>welcome&lt;/h1>
+                  &lt;/body>
+            &lt;/html>
       `);
       
       
@@ -238,13 +238,13 @@ this function allows to quickly add a url to serve
 
       var quick   = require('https-quick').quickh();
       var html    = `
-            <html>
-                  <head>
-                  </head>
-                  <body>
-                        <h1>welcome {{name}}</h1>
-                  </body>
-            </html>
+            &lt;html>
+                  &lt;head>
+                  &lt;/head>
+                  &lt;body>
+                        &lt;h1>welcome {{name}}</h1>
+                  &lt;/body>
+            &lt;/html>
       `;
       quick.url('/index.html',{string:'index.html',ins:{name:'matt'}});
       
@@ -263,18 +263,18 @@ used as needles for a search and replace all, the value being used as the replac
       };
       
       var html    = `
-            <html>
-                  <head>
-                  </head>
-                  <body>
+            &lt;html>
+                  &lt;head>
+                  &lt;/head>
+                  &lt;body>
                   
                         hello my name is {{name}}, i am {{age}}
                         my favourite drink is {{drink}}
                         
-                        <h2>{{drink}} sometimes falls from the sky in drops</h2>
+                        &lt;h2>{{drink}} sometimes falls from the sky in drops&lt;/h2>
                         
-                  </body>
-            </html>
+                  &lt;/body>
+            &lt;/html>
       `;
       
       for(var key in ins)
@@ -287,7 +287,14 @@ used as needles for a search and replace all, the value being used as the replac
 
 assigns a file to be served when the given url is accessed, if the insert parameter is given ( see above ), the file
 is converted to text and a search and replace is performed on the text
+<br>
+<pre>
 
+      var quick   = require('https-quick').quickh();
+      
+      quick.url.file('/index.html','static/index.html');
+      
+</pre>
 <br>
 <br>
 
@@ -295,6 +302,47 @@ is converted to text and a search and replace is performed on the text
 
 generates an random alpha-numeric url 10 characters in length, this with the callback is then passed to
 <code> quick.url(url,callback) </code>
+<br>
+<pre>
+
+      var quick   = require('https-quick').quickh();
+      
+      quick.url('/',main);
+      
+      
+      function main(req,res){
+      
+            var url   = <b>quick.url.gen(complete);</b>
+            
+            var html    = `
+                  &lt;html>
+                        &lt;head>
+                        &lt;/head>
+                        &lt;body>
+                              &lt;pre id=output>&lt;/pre>
+                              &lt;script>
+                                    (async ()=>{
+                                          var response          = await fetch('{{url}}');
+                                          var json              = await response.json();
+                                          output.textContent    = JSON.stringify(json,null,4);
+                                    })();
+                              &lt;/script>
+                        &lt;/body>
+                  &lt;/html>
+            `;
+            
+            quick.res.html(res,html,{url});
+            
+            
+            function complete(req,res){
+            
+                  quick.res.json({hello:'world'});
+                  
+            }//complete
+            
+      }//main
+      
+</pre>
 
 <br>
 <br>
@@ -302,7 +350,16 @@ generates an random alpha-numeric url 10 characters in length, this with the cal
 <h4>quick.url.rem(url)</h4>
 
 removes the given from the current list
+<br>
+<pre>
 
+      var quick   = require('https-quick').quickh();
+      
+      quick.url.file('/index.html','index.html');
+      
+      <b>quick.url.rem('/index.html');</b>
+      
+</pre>
 <br>
 <br>
 
@@ -310,7 +367,14 @@ removes the given from the current list
 
 quickly serve the files in dir <code> dir </dir> from the url stating with <code> base </code>
 the exclude parameter is an array of relative paths from <code> dir </code> to exclude from serving
+<br>
+<pre>
 
+      var quick   = require('https-quick').quickh();
+      
+      quick.dir('/','',['server.js']);
+      
+</pre>
 <br>
 <br>
 
@@ -319,6 +383,21 @@ the exclude parameter is an array of relative paths from <code> dir </code> to e
 processes a post request with content-type application/json, the function returns a promise which resolves
 to a javascript json value
 
+<pre>
+
+      var quick   = require('https-quick').quickh();
+      
+      quick.url('/test',test);
+      
+      async function test(req,res){
+      
+            var json    = await <b>quick.req.post.json(req);</b>
+            
+            console.log(json);
+            
+      }//test
+      
+</pre>
 <br>
 <br>
 
@@ -326,29 +405,107 @@ to a javascript json value
 
 send a html response, html is the string to return and search and replace is performed ( see above ) using the insert
 parameter
+<br>
+<pre>
 
+      var quick   = require('https-quick').quickh();
+      
+      quick.url('/',main);
+      
+      function main(req,res){
+      
+            var name    = 'emma';
+            
+            var html    = `
+                  &lt;html>
+                        &lt;head>
+                        &lt;/head>
+                        &lt;body>
+                              &lt;h2>Hello World&lt;/h2>
+                              &lt;h3>{{name}}&lt;/h3>
+                        &lt;/body>
+                  &lt;/html>
+            `;
+            
+            <b>quick.res.html(res,html,{name});</b>
+            
+      }//main
+      
+</pre>
 <br>
 <br>
+
+
 <h4>quick.res.json(res,json)</h4>
 
 send a json response
+<br>
+<pre>
 
+      var quick   = require('https-quick').quickh();
+      
+      quick.url('/',main);
+      
+      function main(req,res){
+      
+            var json    = {hello:'world'};
+            
+            <b>quick.res.json(res,json);</b>
+            
+      }//main
+      
+</pre>
 <br>
 <br>
 
 <h4>quick.res.file(res,file,ins)</h4>
 
 send a file if the insert parameter is given the file is converted to text and search and replace performed ( see above )
+<br>
+<pre>
 
+      var quick   = require('https-quick').quickh();
+      
+      quick.url('/',main);
+      
+      function main(req,res){
+      
+            <b>quick.res.file(res,'index.html');</b>
+            
+      }//main
+      
+</pre>
 <br>
 <br>
 
 <h4>quick.resolve(dir,file)</h4>
 
 a convenience function to test if the given file resolves into directory dir
-returns the absolute filename if true
-false on failure
+  - returns the absolute filename if true
+  - false on failure
+<br>
+<pre>
 
+      var quick   = require('https-quick').quickh();
+      
+      quick.url('/',main);
+      
+      async function main(req,res){
+      
+            var json    = await quick.req.post.json(req);
+            
+            var abs     = <b>quick.resolve('static/',json.file);</b>
+            
+            if(abs===false){
+                  quick.error(req,res,'invalid filename');
+                  return;
+            }
+            
+            quick.res.file(res,abs);
+            
+      }//main
+      
+</pre>
 <br>
 <br>
 
@@ -357,9 +514,34 @@ false on failure
 a convenience function to test if a given file <code> file </code> exists in directory <code> dir </code>
 return a promise that resolves into the absolute filename if true
 or false on failure
+<br>
+<pre>
+
+      var quick   = require('https-quick').quickh();
+      
+      quick.url('/',main);
+      
+      async function main(req,res){
+      
+            var json    = await quick.req.post.json(req);
+            
+            var abs     = <b>quick.exists('static/',json.file);</b>
+            
+            if(abs===false){
+                  quick.error(req,res,'invalid filename');
+                  return;
+            }
+            
+            quick.res.file(res,abs);
+            
+      }//main
+      
+</pre>
 
 
 <br>
+<br>
+---
 <br>
 <br>
 
