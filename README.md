@@ -265,12 +265,14 @@ this function allows to quickly add a url to serve
 
 <h4>inserting strings into text</h4>
 
-a number of functions allow strings to be inserted into text, the keys are surrounded by double squirly braces and
-used as needles for a search and replace all, the value being used as the replace text
+a number of functions allow strings to be inserted into text
 
+  - the keys are surrounded by double braces { and used as needles for search and replace all,
+  - the value being used as the replace text
+  
 <pre>
 
-      var ins   = {
+      var insert   = {
             name    : 'matt',
             age     : 44,
             drink   : 'milk'
@@ -291,8 +293,8 @@ used as needles for a search and replace all, the value being used as the replac
             &lt;/html>
       `;
       
-      for(var key in ins)
-            html    = html.replaceAll('{{'+key+'}}',ins[key]);
+      for(var key in insert)
+            html    = html.replaceAll('{{'+key+'}}',insert[key]);
             
 </pre>
 <br>
