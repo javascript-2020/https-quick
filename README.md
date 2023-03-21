@@ -316,7 +316,7 @@ is converted to text and search and replace is performed on the text
 
 <h4>quick.url.gen(callback)</h4>
 
-generates an random alpha-numeric url 10 characters in length<br>
+generates a random alpha-numeric url, 10 characters in length<br>
 if callback is given <code> quick.url(url,callback) </code> is called
 <br>
 
@@ -362,12 +362,11 @@ if callback is given <code> quick.url(url,callback) </code> is called
 </pre>
 
 <br>
-<br>
 
 <h4>quick.url.rem(url)</h4>
 
-removes the given from the current list
-<br>
+removes the given from the current list<br>
+
 <pre>
 
       var quick   = require('https-quick').quickh();
@@ -377,7 +376,6 @@ removes the given from the current list
       <b>quick.url.rem('/index.html');</b>
       
 </pre>
-<br>
 <br>
 
 <h4>quick.dir(base,dir,exclude)</h4>
