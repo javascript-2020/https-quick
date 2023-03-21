@@ -313,13 +313,13 @@ is converted to text and search and replace is performed on the text
       
 </pre>
 <br>
-<br>
 
 <h4>quick.url.gen(callback)</h4>
 
-generates an random alpha-numeric url 10 characters in length, this with the callback is then passed to
-<code> quick.url(url,callback) </code>
+generates an random alpha-numeric url 10 characters in length
+if callback is given <code> quick.url(url,callback) </code> is called
 <br>
+
 <pre>
 
       var quick   = require('https-quick').quickh();
