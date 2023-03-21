@@ -36,6 +36,10 @@ which in this simplest form executes
     
 </pre>
 <br>
+https-quick provides a https certificate for ip's : 127.0.0.1 and 127.0.0.2
+for the dns names : localhost and tst-server
+<br>
+<br>
 
 <h4>quick(port,onrequest,'hello')</h4>
 
@@ -63,13 +67,11 @@ https://localhost:3002/hello
 <br>
 <br>
 
-when the quick function is called 'https-quick'<br>
+when the quick function is called https-quick<br>
 
 - adds onerror and onlistening functions
 - calls <code> server.listen </code>
-
-
-- it returns the server object for chaining
+- returns the server object for chaining
 
 <br>
 <br>
@@ -91,6 +93,11 @@ the exposed <code> quick </code> function takes parameters in any order
   - it adds cors support, for all origins to get and post requests
   - it adds a 'cache-control:no-store' header
   
+- if the string 'nokeys' is not present
+
+  - adds keyboard event to the console allow escape to be pressed to quit the process
+  
+<br>
 <pre>
 
       var server    = require('https-quick').<b>quick(2154,'hello')</b>;
