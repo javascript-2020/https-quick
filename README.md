@@ -120,7 +120,7 @@ this calls the <code> quick_ </code> function and automatically adds the 'hello'
 
 <pre>
 
-      var quick   = require('https-quick').quickh(2154);
+      var quick   = require('https-quick').<b>quickh(2154)</b>;
       
 </pre>
 <br>
