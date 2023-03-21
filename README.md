@@ -167,20 +167,21 @@ this produces '400 Bad Request' response<br>
 </pre>
 <br>
 
-<h4>quick.notfound(req,res,msg='not found on this server'</h4>
-this is a convenience '404 not found'
+<h4>quick.notfound(req,res,msg='not found on this server')</h4>
+this produces '404 not found' response
+
   - it requires the request and response streams as arguments
   - the response has statusCode 404
   - the response has content-type text/html
   - the response has body that contains the text from msg
-<br>
+  
 <pre>
 
       var server   = require('https-quick');
       
       server.on('request',(req,res)=>{
       
-            server.quick.notfound(req,res,'was not found on this server');
+            <b>server.quick.notfound(req,res,'was not found on this server');</b>
             
       });
       
