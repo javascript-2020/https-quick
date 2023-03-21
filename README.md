@@ -316,7 +316,7 @@ is converted to text and search and replace is performed on the text
 
 <h4>quick.url.gen(callback)</h4>
 
-generates an random alpha-numeric url 10 characters in length
+generates an random alpha-numeric url 10 characters in length<br>
 if callback is given <code> quick.url(url,callback) </code> is called
 <br>
 
