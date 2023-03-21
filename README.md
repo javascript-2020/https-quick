@@ -472,9 +472,9 @@ send a json response
 
 <h4>quick.res.file(res,file,insert)</h4>
 
-send a file
-if the insert parameter is given the file is converted to text and search and replace performed ( see above )
-<br>
+send a file<br>
+if the insert parameter is given the file is converted to text and search and replace performed ( see above )<br>
+
 <pre>
 
       var quick   = require('https-quick').quickh();
