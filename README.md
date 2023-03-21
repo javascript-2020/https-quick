@@ -103,12 +103,12 @@ the exposed <code> quick </code> function takes parameters in any order
       var server    = require('https-quick').<b>quick(2154,'hello')</b>;
       
 </pre>
-
 <br>
-
+<br>
 <h4>quick_(port,onrequest,'hello')</h4>
 this calls <code> quick </code> but returns the quick function for ease of use
 <br>
+
 <pre>
 
       var quick   = require('https-quick').<b>quick_(2154,'hello')</b>;
