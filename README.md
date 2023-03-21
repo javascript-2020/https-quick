@@ -36,8 +36,11 @@ which in this simplest form executes
     
 </pre>
 <br>
-https-quick provides a https certificate for ip's : 127.0.0.1 and 127.0.0.2
-for the dns names : localhost and tst-server
+https-quick provides a https certificate for<br>
+  - ip's : 127.0.0.1 and 127.0.0.2,<br>
+    https://127.0.0.1:3002/ https://127.0.0.2:3002/
+  - dns names : localhost and tst-server
+    https://localhost:3002/ https://tst-server:3002/
 <br>
 <br>
 
