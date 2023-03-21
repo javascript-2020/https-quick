@@ -365,7 +365,7 @@ removes the given from the current list
 
 <h4>quick.dir(base,dir,exclude)</h4>
 
-quickly serve the files in dir <code> dir </dir> from the url stating with <code> base </code>
+quickly serve the files in dir <code> dir </code> from the url stating with <code> base </code>
 the exclude parameter is an array of relative paths from <code> dir </code> to exclude from serving
 <br>
 <pre>
