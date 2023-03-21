@@ -396,7 +396,7 @@ the exclude parameter is an array of relative paths from <code> dir </code> to e
 <h4>quick.req.post.json(req)</h4>
 
 processes a post request with content-type application/json<br>
-the function returns a promise which resolves to a javascript json value
+returns a promise which resolves to a javascript json value
 
 <pre>
 
@@ -413,7 +413,6 @@ the function returns a promise which resolves to a javascript json value
       }//test
       
 </pre>
-<br>
 <br>
 
 <h4>quick.res.html(res,html,insert)</h4>
@@ -447,7 +446,6 @@ parameter
       }//main
       
 </pre>
-<br>
 <br>
 
 
