@@ -63,9 +63,9 @@ https://localhost:3002/hello
 <br>
 <br>
 
-when the quick function is called<br>
+when the quick function is called 'https-quick'<br>
 
-- https-quick adds onerror and onlistening functions
+- adds onerror and onlistening functions
 - calls <code> server.listen </code>
 
 
@@ -181,20 +181,20 @@ this is a convenience '404 not found'
 
 this function allows to quickly add a url to serve
 
-  - url       - the url to serve, if the url already exists it is removed
+  - url, the url to serve, if the url already exists it is removed
   
-  - callback  - can take a number of forms
-  <br>
-              - a function to be called when a request for the url is made, the function is called with arguments req,res
-              - a string taken to be html and given in response
-              - a promise which is then resolved with arguments req,res
-              - an object
-                - if the object has a 'file' key this is taken as a filename
-                  if the object has a 'ins' key this is used to search and replace within the file text
-                  
-                - if the object has a 'string' key this is taken as html
-                  if the object has a 'ins' key this is used to search and replace within the html
-                  
+  - callback, can take a number of forms
+<br>
+    - a function to be called when a request for the url is made, the function is called with arguments req,res
+    - a string taken to be html and given in response
+    - a promise which is then resolved with arguments req,res
+    - an object
+      - if the object has a 'file' key this is taken as a filename
+        if the object has a 'ins' key this is used to search and replace within the file text
+        
+      - if the object has a 'string' key this is taken as html
+        if the object has a 'ins' key this is used to search and replace within the html
+<br>
 <pre>
 
       var quick   = require('https-quick').quickh();
@@ -250,6 +250,8 @@ this function allows to quickly add a url to serve
       
 </pre>
 <br>
+
+<h4>inserting strings into text</h4>
 
 a number of functions allow strings to be inserted into text, the keys are surrounded by double squirly braces and
 used as needles for a search and replace all, the value being used as the replace text
@@ -372,7 +374,7 @@ the exclude parameter is an array of relative paths from <code> dir </code> to e
 
       var quick   = require('https-quick').quickh();
       
-      quick.dir('/','',['server.js']);
+      <b>quick.dir('/','',['server.js']);</b>
       
 </pre>
 <br>
@@ -458,9 +460,10 @@ send a json response
 <br>
 <br>
 
-<h4>quick.res.file(res,file,ins)</h4>
+<h4>quick.res.file(res,file,insert)</h4>
 
-send a file if the insert parameter is given the file is converted to text and search and replace performed ( see above )
+send a file
+if the insert parameter is given the file is converted to text and search and replace performed ( see above )
 <br>
 <pre>
 
@@ -541,7 +544,9 @@ or false on failure
 
 <br>
 <br>
+
 ---
+
 <br>
 <br>
 
