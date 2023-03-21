@@ -265,16 +265,16 @@ this function allows to quickly add a url to serve
 
 <h4>inserting strings into text</h4>
 
-a number of functions allow strings to be inserted into text
+a number of functions allow strings to be inserted into text, by supplying an object whose
 
-  - the keys are surrounded by double braces { and used as needles for search and replace all,
-  - the value being used as the replace text
+  - the keys are surrounded by double braces '{' and used as the search parameter, all occurrences are replaced
+  - the value is used for the replace text
   
 <pre>
 
       var insert   = {
-            name    : 'matt',
-            age     : 44,
+            name    : 'john',
+            age     : 27,
             drink   : 'milk'
       };
       
@@ -302,13 +302,14 @@ a number of functions allow strings to be inserted into text
 <h4>quick.url.file(url,file,insert)</h4>
 
 assigns a file to be served when the given url is accessed, if the insert parameter is given ( see above ), the file
-is converted to text and a search and replace is performed on the text
+is converted to text and search and replace is performed on the text
 <br>
+
 <pre>
 
       var quick   = require('https-quick').quickh();
       
-      quick.url.file('/index.html','static/index.html');
+      <b>quick.url.file('/index.html','static/index.html');</b>
       
 </pre>
 <br>
