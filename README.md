@@ -142,7 +142,7 @@ the exposed <code> quick </code> function takes parameters in any order
 </pre>
 <br>
 
-***note :***<br><br>
+***note :***<br>
 
 if the parameter 'hello' is used, https-quick can potentially respond to a request
 before any user defined request listeners, therefore when using the 'hello' parameter
@@ -157,13 +157,13 @@ before processing the request
       var quick   = server.quick;
       
       quick.url('/index.html',`
-            <html>
-                  <head>
-                  </head>
-                  <body>
-                        <h1>welcome</h1>
-                  </body>
-            </html>
+            &lt;html>
+                  &lt;head>
+                  &lt;/head>
+                  &lt;body>
+                        &lt;h1>welcome&lt;/h1>
+                  &lt;/body>
+            &lt;/html>
       `);
       
       
