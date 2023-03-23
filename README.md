@@ -146,7 +146,7 @@ the exposed <code> quick </code> function takes parameters in any order
 
 if the parameter 'hello' is used, https-quick can potentially respond to a request
 before any user defined request listeners, therefore when using the 'hello' parameter
-later request listeners need to check that the response writeEnded flag is set to false
+later request listeners need to check that the response writableEnded flag is set to false
 before processing the request
 
 <pre>
