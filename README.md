@@ -369,7 +369,7 @@ if callback is given <code> quick.url(url,callback) </code> is called
             
             function complete(req,res){
             
-                  quick.res.json({hello:'world'});
+                  quick.res.json(res,{hello:'world'});
                   
             }//complete
             
