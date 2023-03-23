@@ -142,6 +142,45 @@ the exposed <code> quick </code> function takes parameters in any order
 </pre>
 <br>
 
+***note :***<br><br>
+
+if the parameter 'hello' is used, https-quick can potentially respond to a request
+before any user defined request listeners, therefore when using the 'hello' parameter
+later request listeners need to check that the response writeEnded flag is set to false
+before processing the request
+
+<pre>
+
+
+      var server   = require('./https-quick').quick('hello');
+      
+      var quick   = server.quick;
+      
+      quick.url('/index.html',`
+            <html>
+                  <head>
+                  </head>
+                  <body>
+                        <h1>welcome</h1>
+                  </body>
+            </html>
+      `);
+      
+      
+      server.on('request',(req,res)=>{
+                                                      console.log('myrequest');
+            <b>if(res.writableEnded){
+                  return;
+            }</b>
+            
+            res.end('helloworld');
+            
+      });
+      
+      
+</pre>
+<br>
+
 <h4>quick.ok(req,res,msg='ok')</h4>
 sends a '200 ok' response<br>
 

@@ -313,7 +313,7 @@
         on.request=async function(req,res){
         
               if(params.hello){
-                                                                    //console.log(req.url);
+                                                                    console.log(req.url);
                     res.setHeader('cache-control','no-store');
                     
                     if(req.method==='OPTIONS'){
@@ -335,16 +335,17 @@
                     
               }
               
+              
               var n   = list.length;
               for(var i=0;i<n;i++){
               
                     var o   = list[i];
                     if(o.url===req.url){
+                                                                                        //console.log('url',o.url);
                           switch(datatype(o.callback)){
                             case 'string'           : quick.res.html(res,o.callback);           break;
                             case 'function'         : o.callback(req,res);                      break;
                             case 'asyncfunction'    : o.callback(req,res);                      break;
-                          //case 'promise'          : o.callback.then({req,res});               break;
                             case 'object'           :
                                 o   = o.callback;
                                 if('file' in o){
@@ -362,18 +363,17 @@
               }//for
               
               
-                                                                    //console.log('req',req.url);
               var n   = dir.length;
               for(var i=0;i<n;i++){
               
                     var o   = dir[i];
-                                                                    //console.log('base',o.baseurl);
                     if(req.url.startsWith(o.baseurl)){
+                                                                    //console.log('base',o.baseurl);
                           var file    = req.url.slice(o.baseurl.length);
                           if(file[0]==='/')file=file.slice(1);
                                                                     //console.log('file',file);
                                                                     
-                          if(o.exc.indexOf(file)==-1){
+                          if(o.exc.indexOf(file)===-1){
                                 var abs     = await exists(o.dir,file);
                                                                     //console.log('abs',abs);
                                 if(abs!==false){
@@ -389,12 +389,18 @@
               if(params.onrequest){
                     if(typeof params.onrequest==='function'){
                           params.onrequest(req,res);
+                          if(res.writableEnded)done();
                           return;
                     }
               }
               
               
-              quick.notfound(req,res);
+              if(server.rawListeners('request').length===1){
+                                                                    //console.log('end');
+                    quick.notfound(req,res);
+                    return;
+              }
+              
               
         }//request
         
@@ -543,6 +549,7 @@
               var request;
               var hello     = false;
               var nokeys    = false;
+              var end       = true;
               
               var arg0    = args[0];
               if(datatype(arg0)==='object'){
