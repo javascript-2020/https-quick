@@ -1,4 +1,8 @@
 
+
+npm : https://www.npmjs.com/package/https-quick
+
+
 <h3>https-quick</h3>
 
 https-quick is a drop in for require('https')<br>
